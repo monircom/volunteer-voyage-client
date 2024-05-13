@@ -17,7 +17,7 @@ import bgimg3 from '../assets/3.jpg'
 export default function Carousel() {
   return (
     <div className='container px-6 py-10 mx-auto rounded-lg'>
-      <Swiper
+      <Swiper 
         spaceBetween={30}
         centeredSlides={true}
         loop={true}
@@ -30,10 +30,10 @@ export default function Carousel() {
         }}
         navigation={true}
         modules={[Autoplay, Pagination, Navigation]}
-        className='mySwiper'
+        className='mySwiper rounded-2xl'
       >
-        <SwiperSlide>
-          <Slide
+        <SwiperSlide >
+          <Slide 
             image={bgimg1}
             text='Get Your Web Development Projects Done in minutes'
           />
