@@ -5,6 +5,6 @@ import './index.css'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <App />
+    <h1 className='font-freeman'> Welcome to Volunteer</h1>
   </React.StrictMode>,
 )
