@@ -5,7 +5,7 @@ import { useContext } from 'react'
 import { AuthContext } from '../../provider/AuthProvider'
 import toast from 'react-hot-toast'
 import axios from 'axios'
-const Registration = () => {
+const Register = () => {
   const navigate = useNavigate()
   const location = useLocation()
   const from = location.state || '/'
@@ -20,8 +20,42 @@ const Registration = () => {
     const photo = form.photo.value
     const pass = form.password.value
     console.log({ email, pass, name, photo })
+    
+    
+
+
     try {
+
+    console.log(pass.length);
+    if(pass.length<6){
+      console.log(pass);
+      toast.error('Password must be at least 6 characters', {
+       duration: 2000,
+       position: 'top-center',
+     });
+      //setPasswordError("Password must be at least 6 characters")
+      return;
+   }
+   else if(!/[A-Z]/.test(pass)){
+     toast.error('Password must have an Uppercase letter', {
+       duration: 2000,
+       position: 'top-center',
+     });
+     //setPasswordError("Password must have an Uppercase letter")
+     return;          
+   }
+   else if(!/[a-z]/.test(pass)){
+     toast.error('Password must have a Lowercase letter', {
+       duration: 2000,
+       position: 'top-center',
+     });
+     //setPasswordError("Password must have a Lowercase letter")
+     return;          
+   }       
+
+
       //2. User Registration
+
       const result = await createUser(email, pass)
 
       await updateUserProfile(name, photo)
@@ -214,4 +248,4 @@ const Registration = () => {
   )
 }
 
-export default Registration
+export default Register
