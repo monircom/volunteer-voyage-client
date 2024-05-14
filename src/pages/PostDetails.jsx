@@ -10,19 +10,23 @@ const PostDetails = () => {
   const navigate = useNavigate()
   const [startDate, setStartDate] = useState(new Date())
   const { user } = useContext(AuthContext)
-  const job = useLoaderData()
+  const post = useLoaderData()
+  const [showModal, setShowModal] = useState(false);
+
   const {
     _id,
-    job_title,
-    description,
-    min_price,
-    max_price,
-    category,
-    deadline,
-    buyer,
-  } = job || {}
+    Thumbnail,
+    Post_Title,
+    Description,
+    Category,   
+    Location,
+    No_of_volunteers_needed,
+    Deadline, 
+    Organizer,   
+  } = post || {}  
 
   const handleFormSubmission = async e => {
+    setShowModal(false)
     e.preventDefault()
     if (user?.email === buyer?.email)
       return toast.error('Action not permitted!')
@@ -63,49 +67,80 @@ const PostDetails = () => {
   return (
     <div className='flex flex-col md:flex-row justify-around gap-5  items-center min-h-[calc(100vh-306px)] md:max-w-screen-xl mx-auto '>
       {/* Job Details */}
-      <div className='flex-1  px-4 py-7 bg-white rounded-md shadow-md md:min-h-[350px]'>
+      <div className='flex-1  px-4 py-7  rounded-md shadow-md md:min-h-[350px]'>
         <div className='flex items-center justify-between'>
-          <span className='text-sm font-light text-gray-800 '>
-            Deadline: {new Date(deadline).toLocaleDateString()}
+          <span className='text-sm font-light  '>
+            Deadline: {new Date(Deadline).toLocaleDateString()}
           </span>
           <span className='px-4 py-1 text-xs text-blue-800 uppercase bg-blue-200 rounded-full '>
-            {category}
+            {Category}
           </span>
         </div>
 
         <div>
-          <h1 className='mt-2 text-3xl font-semibold text-gray-800 '>
-            {job_title}
+          <h1 className='mt-2 text-3xl font-semibold  '>
+            {Post_Title}
           </h1>
 
-          <p className='mt-2 text-lg text-gray-600 '>{description}</p>
-          <p className='mt-6 text-sm font-bold text-gray-600 '>
-            Buyer Details:
+          <p className='mt-2 text-lg  '>{Description}</p>
+          <p className='mt-6 text-sm font-bold  '>
+            Organizer Details:
           </p>
           <div className='flex items-center gap-5'>
             <div>
-              <p className='mt-2 text-sm  text-gray-600 '>
-                Name: {buyer?.name}
+              <p className='mt-2 text-sm   '>
+                Name: {Organizer?.name}
               </p>
-              <p className='mt-2 text-sm  text-gray-600 '>
-                Email: {buyer?.email}
+              <p className='mt-2 text-sm   '>
+                Email: {Organizer?.email}
               </p>
             </div>
             <div className='rounded-full object-cover overflow-hidden w-14 h-14'>
-              <img src={buyer?.photo} alt='' />
+              <img src={Organizer?.photo} alt='' />
             </div>
           </div>
-          <p className='mt-6 text-lg font-bold text-gray-600 '>
-            Range: ${min_price} - ${max_price}
+          <p className='mt-6 text-lg font-bold  '>
+            Range:
           </p>
+         
+
+        <button
+        className="bg-pink-500 text-white active:bg-pink-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+        type="button"
+        onClick={() => setShowModal(true)}
+      >
+        Be A Volunteer
+      </button>
+     
+              
         </div>
       </div>
       {/* Place A Bid Form */}
-      <section className='p-6 w-full  bg-white rounded-md shadow-md flex-1 md:min-h-[350px]'>
-        <h2 className='text-lg font-semibold text-gray-700 capitalize '>
-          Place A Bid
-        </h2>
+       {showModal ? (
+        <>
+          <div
+            className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none"
+          >
+            <div className="relative w-auto my-6 mx-auto max-w-3xl">
+              {/*content*/}
+              <div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-gray-500 outline-none focus:outline-none">
+                {/*header*/}
+                <div className="flex items-start justify-between p-5 border-b border-solid border-blueGray-200 rounded-t">
+                  <h3 className="text-3xl font-semibold">
+                  Be a Volunteer
+                  </h3>   
+                  <button
+                    className="p-1 ml-auto bg-transparent border-0 text-black  float-right text-3xl leading-none font-semibold outline-none focus:outline-none"
+                    onClick={() => setShowModal(false)}
+                  >
+                    X
+                    
+                  </button>               
+                </div>
+                {/*body*/}
 
+
+      <section className='p-6 w-full  bg-white rounded-md shadow-md flex-1 md:min-h-[350px]'>       
         <form onSubmit={handleFormSubmission}>
           <div className='grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2'>
             <div>
@@ -158,16 +193,39 @@ const PostDetails = () => {
             </div>
           </div>
 
+          <div className="flex items-center justify-end p-6 border-t border-solid border-blueGray-200 rounded-b">
+                  <button
+                    className="text-red-500 background-transparent font-bold uppercase px-6 py-2 text-sm outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                    type="button"
+                    onClick={() => setShowModal(false)}
+                  >
+                    Close
+                  </button>
+                  <button
+                    className="bg-emerald-500 text-white active:bg-emerald-600 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                    type="submit"
+                    
+                  >
+                    Request
+                  </button>
+                </div>
+
           <div className='flex justify-end mt-6'>
-            <button
-              type='submit'
-              className='px-8 py-2.5 leading-5 text-white transition-colors duration-300 transform bg-gray-700 rounded-md hover:bg-gray-600 focus:outline-none focus:bg-gray-600'
-            >
-              Place Bid
-            </button>
+            
+            
           </div>
-        </form>
+        </form>        
       </section>
+                {/*footer*/}
+                
+              </div>
+            </div>
+          </div>
+          <div className="opacity-25 fixed inset-0 z-40 bg-black"></div>
+        </>
+      ) : null}
+      
+     
     </div>
   )
 }
