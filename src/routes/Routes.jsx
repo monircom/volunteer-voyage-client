@@ -6,6 +6,7 @@ import Register from './../pages/Authentication/Register';
 import ErrorPage from "../pages/ErrorPage";
 import PrivateRoute from "../routes/PrivateRoute";
 import Profile from "../pages/Profile";
+import PostDetails from "../pages/PostDetails";
 
 const router = createBrowserRouter([
     {
@@ -29,6 +30,16 @@ const router = createBrowserRouter([
                 element: <Register></Register>    
 
             },
+            {
+                path: '/post/:id',
+                element: (
+                  <PrivateRoute>
+                    <PostDetails />
+                  </PrivateRoute>
+                ),
+                loader: ({ params }) =>
+                  fetch(`${import.meta.env.VITE_API_URL}/post/${params.id}`),
+              },
             {
                 path: "/profile",
                 element: <PrivateRoute><Profile></Profile></PrivateRoute>,

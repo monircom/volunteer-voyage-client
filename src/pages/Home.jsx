@@ -1,11 +1,12 @@
 import React from 'react';
 import Carousel from '../components/Carousel';
+import VolunteerNeedsNow from './VolunteerNeedsNow';
 
 const Home = () => {
     return (
-        <div>
-            <h1>Home</h1>
+        <div>            
             <Carousel />
+            <VolunteerNeedsNow></VolunteerNeedsNow>
         </div>
     );
 };

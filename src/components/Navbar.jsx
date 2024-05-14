@@ -70,13 +70,18 @@ const Navbar = () => {
       .catch((error) => console.error(error));
   }
 
+
+
+
+
   const navLinks = (
     <>
       <li data-tooltip-id="my-tooltip" data-tooltip-content="Home">
         <NavLink to="/"> Home</NavLink>
       </li>
+      
       <li data-tooltip-id="my-tooltip" data-tooltip-content="All Tourists Spot">
-        <NavLink to="/all-tourist-spot"> All Tourists Spot</NavLink>
+        <NavLink to="/posts"> Need Volunteer</NavLink>
       </li>
       {/* <li><NavLink to="/login"> Login</NavLink></li>*/}
       {!user && (
@@ -89,6 +94,17 @@ const Navbar = () => {
           <li data-tooltip-id="my-tooltip" data-tooltip-content="Add Tourists Spot">
             <NavLink to="/add-tourists-spot">Add Tourists Spot</NavLink>
           </li>
+          <li>
+             <details>
+               <summary>
+                 My Profile
+               </summary>
+               <ul className="p-2 bg-base-100 rounded-t-none z-50">
+                 <li><a>Link 1</a></li>
+                 <li><a>Link 2</a></li>
+              </ul>
+             </details>
+           </li>
           <li data-tooltip-id="my-tooltip" data-tooltip-content="My List">
             <NavLink to="/my-list">My List</NavLink>
           </li>
@@ -108,7 +124,7 @@ const Navbar = () => {
     </>
   );
   return (
-    <div className="navbar w-max-[80%] bg-base-100 mb-10">
+    <div className="navbar w-max-[80%] bg-base-100 ">
       <div className="navbar-start">
         <div className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -146,7 +162,7 @@ const Navbar = () => {
       </div>
 
       <div className="navbar-end gap-2">
-      <label className="swap swap-rotate">
+      <label className="swap swap-rotate mr-2">
   
   {/* this hidden checkbox controls the state */}
   <input onChange={handleTheme} type="checkbox" name="themechoice" className="theme-controller" value={theme} />  
@@ -196,7 +212,7 @@ const Navbar = () => {
                 </div>
                 </div>
                 </Link> */}
-               <Link to="/profile">
+              
                 <div
                   tabIndex={0}
                   role="button"
@@ -206,7 +222,7 @@ const Navbar = () => {
                     <img alt="User" src={user?.photoURL || avater} />
                   </div>
                 </div>
-                </Link>
+                
               
               <ul
                 tabIndex={0}
