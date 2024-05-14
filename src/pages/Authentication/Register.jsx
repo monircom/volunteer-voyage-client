@@ -1,13 +1,15 @@
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import bgImg from '../../assets/register.jpg'
 import logo from '../../assets/logo.png'
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 import { AuthContext } from '../../provider/AuthProvider'
+import { FaEye, FaEyeSlash  } from "react-icons/fa";
 import toast from 'react-hot-toast'
 import axios from 'axios'
 const Register = () => {
   const navigate = useNavigate()
   const location = useLocation()
+  const [showPassword, setShowPassword] = useState(false)
   const from = location.state || '/'
   const { signInWithGoogle, createUser, updateUserProfile, user, setUser } =
     useContext(AuthContext)
@@ -199,7 +201,7 @@ const Register = () => {
               />
             </div>
 
-            <div className='mt-4'>
+            <div className='mt-4 '>
               <div className='flex justify-between'>
                 <label
                   className='block mb-2 text-sm font-medium text-gray-600 '
@@ -208,15 +210,21 @@ const Register = () => {
                   Password
                 </label>
               </div>
-
+              <div className='flex relative'>
               <input
                 id='loggingPassword'
                 autoComplete='current-password'
                 name='password'
                 required
                 className='block w-full px-4 py-2 text-gray-700 bg-white border rounded-lg    focus:border-blue-400 focus:ring-opacity-40  focus:outline-none focus:ring focus:ring-blue-300'
-                type='password'
+                type={showPassword ? "text" :"password" }
               />
+              <span className="absolute top-3 right-3 text-xl hover:cursor-pointer" onClick={() => setShowPassword(!showPassword)}>
+                 {
+                  showPassword ? <FaEyeSlash></FaEyeSlash> :<FaEye></FaEye>
+                 }
+                  </span>
+                  </div>
             </div>
             <div className='mt-6'>
               <button
