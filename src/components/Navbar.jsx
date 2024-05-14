@@ -1,11 +1,12 @@
 import logo from '../assets/logo.png'
 import { useContext, useEffect, useState } from 'react'
 import { AuthContext } from '../provider/AuthProvider'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import toast from 'react-hot-toast'
 const Navbar = () => {
-  const { user, logOut } = useContext(AuthContext)
-  
+  const { user, logOut } = useContext(AuthContext)  
   const [theme, setTheme] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const localTheme = localStorage.getItem('theme');
@@ -43,6 +44,23 @@ const Navbar = () => {
     }
     //setTheme(theme === "dark" ? "light" : "dark");
   };
+
+  function handleLogOut() {
+    logOut()
+      .then(() => {
+        toast.error("User Logged out", {
+          duration: 2000,
+          position: "top-center",
+        });
+        setTimeout(function () {
+          navigate("/");
+        }, 2500);
+        console.log("user Logged out successfully");
+      })
+      .catch((error) => console.error(error));
+  }
+
+
   return (
     <div className='navbar bg-base-200 shadow-sm container px-4 mx-auto'>
       <div className='flex-1'>
@@ -82,7 +100,7 @@ const Navbar = () => {
           )}
         </ul>
 
-        <label className="swap swap-rotate">
+        <label className="swap swap-rotate mr-2">
   
   {/* this hidden checkbox controls the state */}
   <input onChange={handleTheme} type="checkbox" name="themechoice" className="theme-controller" value={theme} />  
@@ -131,7 +149,7 @@ const Navbar = () => {
               </li>
               <li className='mt-2'>
                 <button
-                  onClick={logOut}
+                  onClick={handleLogOut}
                   className='bg-gray-200 block text-center'
                 >
                   Logout
