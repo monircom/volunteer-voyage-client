@@ -186,7 +186,7 @@ const PostDetails = () => {
 
               {/* Date Picker Input Field */}
               <DatePicker
-                className='border p-2 rounded-md'
+                className='border p-2 rounded-md bg-white'
                 selected={startDate}
                 onChange={date => setStartDate(date)}
               />

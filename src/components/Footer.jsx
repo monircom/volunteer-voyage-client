@@ -16,6 +16,13 @@ const Footer = () => {
         <hr className='my-6 border-gray-200 md:my-10 ' />
 
         <div className='flex flex-col items-center sm:flex-row sm:justify-between'>
+        <p className='text-sm text-gray-500 '>
+           mail: support@volunteervoyage.com           
+          </p>
+          <p className='text-sm text-gray-500 '>           
+           phone: 1234567890
+          </p>
+
           <p className='text-sm text-gray-500 '>
             © Copyright 2024. All Rights Reserved.
           </p>
