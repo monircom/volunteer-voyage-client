@@ -28,36 +28,40 @@ const PostDetails = () => {
   const handleFormSubmission = async e => {
     setShowModal(false)
     e.preventDefault()
-    if (user?.email === buyer?.email)
+    if (user?.email === Organizer?.email)
       return toast.error('Action not permitted!')
     const form = e.target
-    const jobId = _id
-    const price = parseFloat(form.price.value)
-    if (price < parseFloat(min_price))
-      return toast.error('Offer more or at least equal to Minimum Price.')
-    const comment = form.comment.value
+
+    const postId = _id    
+    const suggestion = form.suggestion.value
     const deadline = startDate
     const email = user?.email
-    // const buyer_email = buyer_email
-    const status = 'Pending'
+    //const Organizer_email = Organizer?.email
+    const status = 'Requested'
 
-    const bidData = {
-      jobId,
-      price,
-      deadline,
-      comment,
-      job_title,
-      category,
+    const appliedData = {
+      postId,      
+      deadline,      
+      Post_Title,
+      Description,
+      Category,
       email,
-      buyer_email: buyer?.email,
+      Deadline,
+      Location,
+      No_of_volunteers_needed,
+      Organizer_email: Organizer?.email,
       status,
-      buyer,
+      suggestion,      
+      Organizer,
     }
+
+   // console.log(appliedData);
+    //return;
     try {
-      const { data } = await axiosSecure.post(`/bid`, bidData)
+      const { data } = await axiosSecure.post(`/applied`, appliedData)
       console.log(data)
-      toast.success('Bid Placed Successfully!')
-      navigate('/my-bids')
+      toast.success('Requested Successfully!')
+      //navigate('/my-posts')
     } catch (err) {
       toast.success(err.response.data)
       e.target.reset()
@@ -144,17 +148,75 @@ const PostDetails = () => {
         <form onSubmit={handleFormSubmission}>
           <div className='grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2'>
             <div>
-              <label className='text-gray-700 ' htmlFor='price'>
-                Price
+              <label className='text-gray-700 ' htmlFor='Thumbnail'>
+              Thumbnail
               </label>
               <input
-                id='price'
+                id='Thumbnail'
                 type='text'
-                name='price'
-                required
+                name='Thumbnail'
+                disabled
+                defaultValue={Thumbnail}
                 className='block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md   focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40  focus:outline-none focus:ring'
               />
             </div>
+
+            <div>
+              <label className='text-gray-700 ' htmlFor='Post_Title'>
+              Post Title
+              </label>
+              <input
+                id='Post_Title'
+                type='text'
+                name='Post_Title'
+                disabled
+                defaultValue={Post_Title}
+                className='block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md   focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40  focus:outline-none focus:ring'
+              />
+            </div>
+
+            <div>
+              <label className='text-gray-700 ' htmlFor='Description'>
+              Description
+              </label>
+              <input
+                id='Description'
+                type='text'
+                name='Description'
+                disabled
+                defaultValue={Description}
+                className='block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md   focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40  focus:outline-none focus:ring'
+              />
+            </div>
+
+            <div>
+              <label className='text-gray-700 ' htmlFor='Category'>
+              Category
+              </label>
+              <input
+                id='Category'
+                type='text'
+                name='Category'
+                disabled
+                defaultValue={Category}
+                className='block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md   focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40  focus:outline-none focus:ring'
+              />
+            </div>
+
+            <div>
+              <label className='text-gray-700 ' htmlFor='Location'>
+              Location
+              </label>
+              <input
+                id='Location'
+                type='text'
+                name='Location'
+                disabled
+                defaultValue={Location}
+                className='block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md   focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40  focus:outline-none focus:ring'
+              />
+            </div>
+
 
             <div>
               <label className='text-gray-700 ' htmlFor='emailAddress'>
@@ -171,16 +233,19 @@ const PostDetails = () => {
             </div>
 
             <div>
-              <label className='text-gray-700 ' htmlFor='comment'>
-                Comment
+              <label className='text-gray-700 ' htmlFor='No_of_volunteers_needed'>
+              Volunteers Needed
               </label>
               <input
-                id='comment'
-                name='comment'
-                type='text'
+                id='No_of_volunteers_needed'
+                type='email'
+                name='No_of_volunteers_needed'
+                disabled
+                defaultValue={No_of_volunteers_needed}
                 className='block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md   focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40  focus:outline-none focus:ring'
               />
             </div>
+           
             <div className='flex flex-col gap-2 '>
               <label className='text-gray-700'>Deadline</label>
 
@@ -188,9 +253,23 @@ const PostDetails = () => {
               <DatePicker
                 className='border p-2 rounded-md bg-white'
                 selected={startDate}
+                disabled
                 onChange={date => setStartDate(date)}
               />
             </div>
+
+            <div>
+              <label className='text-gray-700 ' htmlFor='suggestion'>
+              Suggestion
+              </label>
+              <input
+                id='suggestion'
+                name='suggestion'
+                type='text'
+                className='block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md   focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40  focus:outline-none focus:ring'
+              />
+            </div>
+
           </div>
 
           <div className="flex items-center justify-end p-6 border-t border-solid border-blueGray-200 rounded-b">

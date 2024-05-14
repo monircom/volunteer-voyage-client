@@ -21,13 +21,13 @@ const PostCard = ({ post }) => {
     <div>        
     <div className="card w-full  h-full bg-base-100 shadow-xl border-2 rounded-md hover:scale-[1.05] transition-all">
           <figure className="rounded-xl bg-gray-300 m-5">
-            <img src={Thumbnail} alt="Spot" className="w-[100%] h-full rounded-xl" />
+            <img src={Thumbnail} alt="Post" className="w-[100%] h-full rounded-xl" />
           </figure>
           
           <div className="card-body text-left">
             <h2 className="card-title font-playfair-display text-2xl">{Post_Title}</h2>                
-            <p className="">Category: {Category} $</p> 
-            <p className="">VDeadline {Deadline}</p>   
+            <p className="">Category: {Category}</p> 
+            <p className="">Deadline: {Deadline}</p>   
            
             <hr className="my-6 border-t-2 border-dashed"></hr>     
             <div className="">
