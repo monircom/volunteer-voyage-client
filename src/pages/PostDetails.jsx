@@ -63,7 +63,7 @@ const PostDetails = () => {
       const { data } = await axiosSecure.post(`/applied`, appliedData)
       console.log(data)
       toast.success('Requested Successfully!')
-      //navigate('/my-posts')
+      navigate('/my-list')
     } catch (err) {
       toast.success(err.response.data)
       e.target.reset()
