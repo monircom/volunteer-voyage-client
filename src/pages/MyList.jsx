@@ -10,6 +10,7 @@ const MyList = () => {
   const axiosSecure = useAxiosSecure()
   
   const [posts, setPosts] = useState([])
+  const [applied, setApplied] = useState([])
 
   useEffect(() => {
     getData()
@@ -71,7 +72,12 @@ const MyList = () => {
 
   return (
     <div className="pt-10 mx-auto">
-      <div className="overflow-x-auto">
+
+    <div className="w-full h-[100px] bg-[rgba(19,19,19,0.05)] rounded-xl flex justify-center items-center">
+        <h1 className="text-3xl font-bold">My Post</h1>        
+      </div> 
+
+      <div className="overflow-x-auto mb-5">
         <table className="table">
           {/* head */}
           <thead>
@@ -112,6 +118,64 @@ const MyList = () => {
           </tbody>
         </table>
       </div>
+
+      {!posts.length && (
+              <div className="w-full h-[100px] bg-[rgba(214,111,111,0.05)] rounded-xl flex justify-center items-center">
+              <h1 className="text-2xl font-bold">No Data Available</h1>        
+            </div>  
+            )}
+
+      <div className="w-full h-[100px] bg-[rgba(19,19,19,0.05)] rounded-xl flex justify-center items-center">
+        <h1 className="text-3xl font-bold">My Requested List</h1>        
+      </div>        
+
+      <div className="overflow-x-auto mb-5">
+        <table className="table">
+          {/* head */}
+          <thead>
+            <tr>
+              <th>Thumbnail</th>
+              <th>Title</th>
+              <th>Volunteers Needed</th>
+              <th>Deadline</th>              
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>         
+            {applied.map((post) => (
+              <tr key={post._id}>
+                <td>
+                  <div className="avatar">
+                    <div className="mask mask-squircle w-12 h-12">
+                      <img src={post?.thumbnail} alt="Image" />
+                    </div>
+                  </div>
+                </td>
+                <td>{post?.post_title}</td>
+                <td>{post?.no_of_volunteers_needed}</td>
+                <td>{new Date(post?.deadline).toLocaleDateString()}</td>
+                <td>
+                  <Link to={`/update-post/${post?._id}`}>
+                    <button className="btn mr-2 bg-green-600">Update</button>
+                  </Link>
+                  <button
+                    onClick={() => handleDelete(post?._id)}
+                    className="btn bg-red-700"
+                  >
+                    X
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        {!applied.length && (
+              <div className="w-full h-[100px] bg-[rgba(214,111,111,0.05)] rounded-xl flex justify-center items-center">
+              <h1 className="text-2xl font-bold">No Data Available</h1>        
+            </div>  
+            )}
+      </div>
+
     </div>
   );
 };
