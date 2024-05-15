@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import PostCard from '../components/PostCard';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 const VolunteerNeedsNow = () => {
 const [posts, setPosts] = useState([])
@@ -22,10 +23,7 @@ const [posts, setPosts] = useState([])
         Join hands, ignite hearts, make a difference today.
 Serve with purpose, impact lives, be the change.
 Volunteer passion, empower change, create tomorrow.
-        </p>
-        <div className='flex items-center justify-center'>
-         
-        </div>
+        </p>        
         
           <div className='grid grid-cols-1 gap-8 mt-8 xl:mt-16 md:grid-cols-2 lg:grid-cols-3'>
           {posts?.length > 6
@@ -33,8 +31,11 @@ Volunteer passion, empower change, create tomorrow.
         .map((post) => <PostCard key={post._id} post={post} />)
     : posts?.map((post) => (
         <PostCard key={post._id} post={post} />
-      ))}
+      ))}            
           </div>
+          <div className='flex justify-center items-center my-5'>
+              <Link className='w-[50%]' to={`/need-volunteer`}>  <button className="btn btn-primary w-full ">All Posts</button>  </Link>         
+              </div>  
 
           
         

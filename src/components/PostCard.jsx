@@ -27,7 +27,7 @@ const PostCard = ({ post }) => {
           <div className="card-body text-left">
             <h2 className="card-title font-playfair-display text-2xl">{post_title}</h2>                
             <p className="">Category: {category}</p> 
-            <p className="">Deadline: {deadline}</p>   
+            <p className="">Deadline: {new Date(deadline).toLocaleDateString()}</p>   
            
             <hr className="my-6 border-t-2 border-dashed"></hr>     
             <div className="">

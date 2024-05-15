@@ -3,6 +3,7 @@ import { AuthContext } from "../providers/AuthProvider";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../hooks/useAxiosSecure";
+import axios from "axios";
 
 const MyList = () => {
   const { user } = useContext(AuthContext);
@@ -17,7 +18,8 @@ const MyList = () => {
   }, [user])
 
   const getData = async () => {
-    const { data } = await axiosSecure(`/posts/${user?.email}`)
+    //const { data } = await axiosSecure(`/posts/${user?.email}`)
+    const { data } = await axios(`${import.meta.env.VITE_API_URL}/posts/${user?.email}`)
     setPosts(data)   
   }
 
@@ -26,10 +28,17 @@ const MyList = () => {
   }, [user])
 
   const getAppliedData = async () => {
-    const { data } = await axiosSecure(`/applied/${user?.email}`)
+    //const { data } = await axiosSecure(`/applied/${user?.email}`)
+    const { data } = await axios(`${import.meta.env.VITE_API_URL}/applied/${user?.email}`)
     setApplied(data)   
   }
 
+  // const updatePostData = async (postID) => {
+  //   const { data } = await axios.patch(
+  //     `${import.meta.env.VITE_API_URL}/applied-post/${postID}`,      
+  //   )
+  //   console.log(data)
+  // }
   
   // const { user } = useAuth() || {};
  // const [item, setItem] = useState([]);
@@ -46,7 +55,7 @@ const MyList = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         fetch(`${import.meta.env.VITE_API_URL}/post/${id}`, {
-          method: "DELETE",
+          method: "DELETE",                   
         })
           .then((res) => res.json())
           .then((data) => {
@@ -65,6 +74,47 @@ const MyList = () => {
       }
     });
   };
+
+
+  const handlePostCancel = (id,postID) => {
+    //console.log(postID,"ID")
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+
+          //Update volunteer No
+
+        fetch(`${import.meta.env.VITE_API_URL}/applied/${id}`, {
+          method: "DELETE",
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            if (data.deletedCount > 0) {
+              console.log("deleted");
+              const remainingSpots = applied.filter((post) => post._id !== id);
+              setApplied(remainingSpots);
+              Swal.fire({
+                title: "Deleted!",
+                text: "Your Data has been deleted.",
+                icon: "success",
+              });
+            }
+          });
+        
+      }
+    });
+    
+  };
+
+
+
 
   // console.log(user);
   // useEffect(() => {
@@ -96,7 +146,7 @@ const MyList = () => {
             </tr>
           </thead>
           <tbody>
-            {posts.map((post) => (
+            {posts?.map((post) => (
               <tr key={post._id}>
                 <td>
                   <div className="avatar">
@@ -163,7 +213,7 @@ const MyList = () => {
                 <td>
                   
                   <button title="Cancel"
-                    onClick={() => handleDelete(post?._id)}
+                    onClick={() => handlePostCancel(post?._id,post?.postId)}
                     className="btn bg-red-700"
                   >
                     X
