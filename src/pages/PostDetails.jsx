@@ -8,7 +8,7 @@ import { AuthContext } from '../provider/AuthProvider'
 const PostDetails = () => {
   const axiosSecure = useAxiosSecure()
   const navigate = useNavigate()
-  const [startDate, setStartDate] = useState(new Date())
+  //const [startDate, setStartDate] = useState(new Date())
   const { user } = useContext(AuthContext)
   const post = useLoaderData()
   const [showModal, setShowModal] = useState(false);
@@ -29,14 +29,15 @@ const PostDetails = () => {
   const handleFormSubmission = async e => {
     setShowModal(false)
     e.preventDefault()
-    if (user?.email === Organizer?.email)
+    if (user?.email === organizer_email)
       return toast.error('Action not permitted!')
     const form = e.target
 
     const postId = _id    
     const suggestion = form.suggestion.value
-    const deadline = startDate
+    //const deadline = startDate
     const email = user?.email
+    const name = user?.displayName
     //const Organizer_email = Organizer?.email
     const status = 'Requested'
 
@@ -46,7 +47,8 @@ const PostDetails = () => {
       post_title,
       description,
       category,
-      email,      
+      email,
+      name,      
       location,
       no_of_volunteers_needed,
       organizer_email,
@@ -93,18 +95,16 @@ const PostDetails = () => {
           <div className='flex items-center gap-5'>
             <div>
               <p className='mt-2 text-sm   '>
-                Name: {Organizer?.name}
+                Name: {organizer_name}
               </p>
               <p className='mt-2 text-sm   '>
-                Email: {Organizer?.email}
+                Email: {organizer_email}
               </p>
             </div>
-            <div className='rounded-full object-cover overflow-hidden w-14 h-14'>
-              <img src={Organizer?.photo} alt='' />
-            </div>
+            
           </div>
           <p className='mt-6 text-lg font-bold  '>
-            Range:
+            No of Volunteer Needed: {no_of_volunteers_needed}
           </p>
          
 
@@ -247,10 +247,11 @@ const PostDetails = () => {
             </div>
            
             <div className='flex flex-col gap-2 '>
-              <label className='text-gray-700' htmlFor='deadline'>Deadline</label>
+              <label className='text-gray-700' htmlFor='deadline'>
+                Deadline</label>
               <input
                 id='deadline'
-                type='email'
+                type='text'
                 name='deadline'
                 disabled
                 defaultValue={deadline}
