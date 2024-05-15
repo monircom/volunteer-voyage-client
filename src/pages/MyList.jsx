@@ -13,20 +13,26 @@ const MyList = () => {
   const [applied, setApplied] = useState([])
 
   useEffect(() => {
-    getData()
-    //console.log(posts);
-
+    getData()    
   }, [user])
 
   const getData = async () => {
     const { data } = await axiosSecure(`/posts/${user?.email}`)
-    setPosts(data)
-    //console.log(data);
+    setPosts(data)   
+  }
+
+  useEffect(() => {
+    getAppliedData()    
+  }, [user])
+
+  const getAppliedData = async () => {
+    const { data } = await axiosSecure(`/applied/${user?.email}`)
+    setApplied(data)   
   }
 
   
   // const { user } = useAuth() || {};
-  const [item, setItem] = useState([]);
+ // const [item, setItem] = useState([]);
 
   const handleDelete = (id) => {
     Swal.fire({
@@ -39,15 +45,15 @@ const MyList = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`https://b9a10-destination-unknown-server.vercel.app/my-list/${id}`, {
+        fetch(`${import.meta.env.VITE_API_URL}/post/${id}`, {
           method: "DELETE",
         })
           .then((res) => res.json())
           .then((data) => {
             if (data.deletedCount > 0) {
               console.log("deleted");
-              const remainingSpots = item.filter((spot) => spot._id !== id);
-              setItem(remainingSpots);
+              const remainingSpots = posts.filter((post) => post._id !== id);
+              setPosts(remainingSpots);
               Swal.fire({
                 title: "Deleted!",
                 text: "Your Data has been deleted.",
@@ -74,7 +80,7 @@ const MyList = () => {
     <div className="pt-10 mx-auto">
 
     <div className="w-full h-[100px] bg-[rgba(19,19,19,0.05)] rounded-xl flex justify-center items-center">
-        <h1 className="text-3xl font-bold">My Post</h1>        
+        <h1 className="text-3xl font-bold">My Need Volunteer Post</h1>        
       </div> 
 
       <div className="overflow-x-auto mb-5">
@@ -126,7 +132,7 @@ const MyList = () => {
             )}
 
       <div className="w-full h-[100px] bg-[rgba(19,19,19,0.05)] rounded-xl flex justify-center items-center">
-        <h1 className="text-3xl font-bold">My Requested List</h1>        
+        <h1 className="text-3xl font-bold">My Requested Volunteer Post</h1>        
       </div>        
 
       <div className="overflow-x-auto mb-5">
@@ -136,7 +142,7 @@ const MyList = () => {
             <tr>
               <th>Thumbnail</th>
               <th>Title</th>
-              <th>Volunteers Needed</th>
+              <th>Status</th>
               <th>Deadline</th>              
               <th>Action</th>
             </tr>
@@ -152,13 +158,11 @@ const MyList = () => {
                   </div>
                 </td>
                 <td>{post?.post_title}</td>
-                <td>{post?.no_of_volunteers_needed}</td>
+                <td>{post?.status}</td>
                 <td>{new Date(post?.deadline).toLocaleDateString()}</td>
                 <td>
-                  <Link to={`/update-post/${post?._id}`}>
-                    <button className="btn mr-2 bg-green-600">Update</button>
-                  </Link>
-                  <button
+                  
+                  <button title="Cancel"
                     onClick={() => handleDelete(post?._id)}
                     className="btn bg-red-700"
                   >
