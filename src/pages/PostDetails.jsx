@@ -103,7 +103,7 @@ const PostDetails = () => {
             </div>
             
           </div>
-          <p className='mt-6 text-lg font-bold  '>
+          <p className='my-6 text-lg font-bold  '>
             No of Volunteer Needed: {no_of_volunteers_needed}
           </p>
          
@@ -115,11 +115,18 @@ const PostDetails = () => {
       >
         Be A Volunteer
       </button>
+
+      
      
               
         </div>
       </div>
-      {/* Place A Bid Form */}
+      <div className='flex justify-center items-center'> 
+      <figure className="rounded-xl bg-[rgba(19,19,19,0.05)] p-16">
+            <img src={thumbnail} alt="Spot" className="rounded-xl w-[425px]" />
+          </figure>
+      </div>
+      {/* Place A Request Form */}
        {showModal ? (
         <>
           <div

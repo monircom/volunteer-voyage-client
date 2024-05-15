@@ -81,8 +81,8 @@ const VolunteerPosts = () => {
                   onChange={e => setSearchText(e.target.value)}
                 value={searchText}
                   name='search'
-                  placeholder='Enter Job Title'
-                  aria-label='Enter Job Title'
+                  placeholder='Enter Post Title'
+                  aria-label='Enter Post Title'
                 />
   
                 <button className='px-1 md:px-4 py-3 text-sm font-medium tracking-wider text-gray-100 uppercase transition-colors duration-300 transform bg-gray-700 rounded-md hover:bg-gray-600 focus:bg-gray-600 focus:outline-none'>
