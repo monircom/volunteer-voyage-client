@@ -15,14 +15,15 @@ const PostDetails = () => {
 
   const {
     _id,
-    Thumbnail,
-    Post_Title,
-    Description,
-    Category,   
-    Location,
-    No_of_volunteers_needed,
-    Deadline, 
-    Organizer,   
+    thumbnail,
+    post_title,
+    description,
+    category,   
+    location,
+    no_of_volunteers_needed,
+    deadline, 
+    organizer_email,
+    organizer_name,   
   } = post || {}  
 
   const handleFormSubmission = async e => {
@@ -42,17 +43,16 @@ const PostDetails = () => {
     const appliedData = {
       postId,      
       deadline,      
-      Post_Title,
-      Description,
-      Category,
-      email,
-      Deadline,
-      Location,
-      No_of_volunteers_needed,
-      Organizer_email: Organizer?.email,
+      post_title,
+      description,
+      category,
+      email,      
+      location,
+      no_of_volunteers_needed,
+      organizer_email,
       status,
       suggestion,      
-      Organizer,
+      organizer_name,
     }
 
    // console.log(appliedData);
@@ -74,19 +74,19 @@ const PostDetails = () => {
       <div className='flex-1  px-4 py-7  rounded-md shadow-md md:min-h-[350px]'>
         <div className='flex items-center justify-between'>
           <span className='text-sm font-light  '>
-            Deadline: {new Date(Deadline).toLocaleDateString()}
+            Deadline: {new Date(deadline).toLocaleDateString()}
           </span>
           <span className='px-4 py-1 text-xs text-blue-800 uppercase bg-blue-200 rounded-full '>
-            {Category}
+            {category}
           </span>
         </div>
 
         <div>
           <h1 className='mt-2 text-3xl font-semibold  '>
-            {Post_Title}
+            {post_title}
           </h1>
 
-          <p className='mt-2 text-lg  '>{Description}</p>
+          <p className='mt-2 text-lg  '>{description}</p>
           <p className='mt-6 text-sm font-bold  '>
             Organizer Details:
           </p>
@@ -148,71 +148,71 @@ const PostDetails = () => {
         <form onSubmit={handleFormSubmission}>
           <div className='grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2'>
             <div>
-              <label className='text-gray-700 ' htmlFor='Thumbnail'>
+              <label className='text-gray-700 ' htmlFor='thumbnail'>
               Thumbnail
               </label>
               <input
-                id='Thumbnail'
+                id='thumbnail'
                 type='text'
-                name='Thumbnail'
+                name='thumbnail'
                 disabled
-                defaultValue={Thumbnail}
+                defaultValue={thumbnail}
                 className='block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md   focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40  focus:outline-none focus:ring'
               />
             </div>
 
             <div>
-              <label className='text-gray-700 ' htmlFor='Post_Title'>
+              <label className='text-gray-700 ' htmlFor='post_title'>
               Post Title
               </label>
               <input
-                id='Post_Title'
+                id='post_title'
                 type='text'
-                name='Post_Title'
+                name='post_title'
                 disabled
-                defaultValue={Post_Title}
+                defaultValue={post_title}
                 className='block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md   focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40  focus:outline-none focus:ring'
               />
             </div>
 
             <div>
-              <label className='text-gray-700 ' htmlFor='Description'>
+              <label className='text-gray-700 ' htmlFor='description'>
               Description
               </label>
               <input
-                id='Description'
+                id='description'
                 type='text'
-                name='Description'
+                name='description'
                 disabled
-                defaultValue={Description}
+                defaultValue={description}
                 className='block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md   focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40  focus:outline-none focus:ring'
               />
             </div>
 
             <div>
-              <label className='text-gray-700 ' htmlFor='Category'>
+              <label className='text-gray-700 ' htmlFor='category'>
               Category
               </label>
               <input
-                id='Category'
+                id='category'
                 type='text'
-                name='Category'
+                name='category'
                 disabled
-                defaultValue={Category}
+                defaultValue={category}
                 className='block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md   focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40  focus:outline-none focus:ring'
               />
             </div>
 
             <div>
-              <label className='text-gray-700 ' htmlFor='Location'>
+              <label className='text-gray-700 ' htmlFor='location'>
               Location
               </label>
               <input
-                id='Location'
+                id='location'
                 type='text'
-                name='Location'
+                name='location'
                 disabled
-                defaultValue={Location}
+                defaultValue={location}
                 className='block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md   focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40  focus:outline-none focus:ring'
               />
             </div>
@@ -233,29 +233,38 @@ const PostDetails = () => {
             </div>
 
             <div>
-              <label className='text-gray-700 ' htmlFor='No_of_volunteers_needed'>
+              <label className='text-gray-700 ' htmlFor='no_of_volunteers_needed'>
               Volunteers Needed
               </label>
               <input
-                id='No_of_volunteers_needed'
+                id='no_of_volunteers_needed'
                 type='email'
-                name='No_of_volunteers_needed'
+                name='no_of_volunteers_needed'
                 disabled
-                defaultValue={No_of_volunteers_needed}
+                defaultValue={no_of_volunteers_needed}
                 className='block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md   focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40  focus:outline-none focus:ring'
               />
             </div>
            
             <div className='flex flex-col gap-2 '>
-              <label className='text-gray-700'>Deadline</label>
+              <label className='text-gray-700' htmlFor='deadline'>Deadline</label>
+              <input
+                id='deadline'
+                type='email'
+                name='deadline'
+                disabled
+                defaultValue={deadline}
+                className='block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md   focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40  focus:outline-none focus:ring'
+              />
+
 
               {/* Date Picker Input Field */}
-              <DatePicker
+              {/* <DatePicker
                 className='border p-2 rounded-md bg-white'
                 selected={startDate}
                 disabled
                 onChange={date => setStartDate(date)}
-              />
+              /> */}
             </div>
 
             <div>
