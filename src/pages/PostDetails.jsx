@@ -4,7 +4,7 @@ import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 import toast from 'react-hot-toast'
 import useAxiosSecure from '../hooks/useAxiosSecure'
-import { AuthContext } from '../provider/AuthProvider'
+import { AuthContext } from '../providers/AuthProvider'
 const PostDetails = () => {
   const axiosSecure = useAxiosSecure()
   const navigate = useNavigate()

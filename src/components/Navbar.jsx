@@ -4,7 +4,7 @@ import logo from '../assets/logo.png'
 import toast, { Toaster } from "react-hot-toast";
 import avater from "../assets/avatar.png";
 import { Tooltip } from 'react-tooltip';
-import { AuthContext } from "../provider/AuthProvider";
+import { AuthContext } from "../providers/AuthProvider";
 
 //import ThemeControllerBtn from "./ThemeControllerBtn";
 

@@ -2,7 +2,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom'
 import bgImg from '../../assets/login.jpg'
 import logo from '../../assets/logo.png'
 import { useContext, useEffect, useState } from 'react'
-import { AuthContext } from '../../provider/AuthProvider'
+import { AuthContext } from '../../providers/AuthProvider'
 import { FaEye, FaEyeSlash  } from "react-icons/fa";
 import toast from 'react-hot-toast'
 import axios from 'axios'

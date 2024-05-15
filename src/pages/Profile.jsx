@@ -4,7 +4,7 @@ import avater from "../assets/avatar.png";
 
 import { Link, useNavigate } from "react-router-dom";
 import toast, { Toaster } from "react-hot-toast";
-import { AuthContext } from "../provider/AuthProvider";
+import { AuthContext } from "../providers/AuthProvider";
 const Profile = () => {
 
     const { user , logOut } = useContext(AuthContext);

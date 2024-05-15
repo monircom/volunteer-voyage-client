@@ -3,7 +3,7 @@ import ReactDOM from "react-dom/client";
 import router from "./routes/Routes";
 import "./index.css";
 import {  RouterProvider } from "react-router-dom";
-import AuthProvider from "./provider/AuthProvider";
+import AuthProvider from "./providers/AuthProvider";
 import { Toaster } from "react-hot-toast";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
