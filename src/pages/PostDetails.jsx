@@ -42,7 +42,8 @@ const PostDetails = () => {
     const status = 'Requested'
 
     const appliedData = {
-      postId,      
+      postId,
+      thumbnail,      
       deadline,      
       post_title,
       description,
