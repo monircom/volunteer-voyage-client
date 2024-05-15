@@ -71,17 +71,14 @@ const Navbar = () => {
   }
 
 
-
-
-
   const navLinks = (
     <>
       <li data-tooltip-id="my-tooltip" data-tooltip-content="Home">
         <NavLink to="/"> Home</NavLink>
       </li>
       
-      <li data-tooltip-id="my-tooltip" data-tooltip-content="All Tourists Spot">
-        <NavLink to="/posts"> Need Volunteer</NavLink>
+      <li data-tooltip-id="my-tooltip" data-tooltip-content="Need Volunteer">
+        <NavLink to="/need-volunteer"> Need Volunteer</NavLink>
       </li>
       {/* <li><NavLink to="/login"> Login</NavLink></li>*/}
       {!user && (
@@ -91,23 +88,25 @@ const Navbar = () => {
       )}
       {user && (
         <>
-          <li data-tooltip-id="my-tooltip" data-tooltip-content="Add Tourists Spot">
-            <NavLink to="/add-tourists-spot">Add Tourists Spot</NavLink>
+          <li data-tooltip-id="my-tooltip" data-tooltip-content="Add Post">
+            <NavLink to="/add-tourists-spot">Add Post</NavLink>
           </li>
           <li>
              <details>
                <summary>
                  My Profile
                </summary>
-               <ul className="p-2 bg-base-100 rounded-t-none z-50">
-                 <li><a>Link 1</a></li>
-                 <li><a>Link 2</a></li>
+               <ul className="p-2 bg-base-100 rounded-t-none z-50">                 
+                 <li data-tooltip-id="my-tooltip" data-tooltip-content="Add Volunteer Post">
+                  <NavLink to="/add-post">Add Volunteer Post</NavLink>
+                  </li>
+                  <li data-tooltip-id="my-tooltip" data-tooltip-content="Add Volunteer Post">
+                  <NavLink to="/my-list">Manage My Post</NavLink>
+                  </li>
               </ul>
              </details>
            </li>
-          <li data-tooltip-id="my-tooltip" data-tooltip-content="My List">
-            <NavLink to="/my-list">My List</NavLink>
-          </li>
+          
           
           {/* <li>
             <NavLink to="/update"> Update Profile</NavLink>
