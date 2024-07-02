@@ -1,5 +1,18 @@
 # Volunteer Voyage
 
+# Getting Started
+
+First, clone to loacaldrive:
+ - npm init
+ - npm run dev
+   
+Open http://localhost:3000 with your browser to see the result.  
+
+# Live Link
+ [Live Server](https://volunteer-voyage.web.app/)
+
+
+# Features
 Volunteer Voyage where user can share volunteer work with everyone.
 
 - User Can Register
@@ -8,20 +21,5 @@ Volunteer Voyage where user can share volunteer work with everyone.
 - User can Delete their volunteer post
 - User can Apply on others volunteer post
 
-
-# Assignment
-
-Assignment_category_0010
-
-Volunteer Voyage
-
-client-side:
-https://github.com/Porgramming-Hero-web-course/b9a11-client-side-monircom
-
-server-side:
-https://github.com/Porgramming-Hero-web-course/b9a11-server-side-monircom
-
-Live Link:
-https://volunteer-voyage.web.app/
 
 
