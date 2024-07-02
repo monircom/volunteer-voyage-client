@@ -28,4 +28,10 @@ Volunteer Voyage where user can share volunteer work with everyone.
 - User can Apply on others volunteer post
 
 
+# npm packages used
+
+* React Awesome Reveal
+* React-tooltip
+* React Leaflet
+
 
